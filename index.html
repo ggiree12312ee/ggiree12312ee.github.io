@@ -154,8 +154,8 @@
       <div class="column is-four-fifths">
         <h2 class="title is-3">Overview</h2>
         <div class="content has-text-justified">
-          <p></p>
-          <p></p>
+          <p>Latent Diffusion Models (LDMs) represent a milestone for image generation task by leveraging vast collection of text-image pairs and denoising process. LDMs enable users to create high-quality images through simple text prompts. Yet, LDMs often fall short in generating user-specific concepts e.g. their pets, a scene in a national park, which poses a practical challenge in text-to-image generation since these user-specific concepts are hard to describe directly by text. To address this issue, personalization techniques allow users to adapt LDMs to generate their desired specific content by finetuning it with their own examples. Existing methods tend to make the assumption that personalized concepts are fixed, which means that storing all of the personalized model weights and multiple times of fusion are required if users need different numbers of personalized concepts across different images. However, in the realistic application scenario, users' personalized concepts never remain static and will incrementally increase. A practical scenario is that users can continuously assign new concepts to a single diffusion model and additional computation effort while generating new composite images is not required. Furthermore, learning the concepts separately usually results in conflict while fusing concepts together.</p>
+          <p>In this paper, we propose CNS, <b>C</b>oncept <b>N</b>euron <b>S</b>election, which is able to identify the neurons relevant to personalized target concepts in an incremental fashion. Specifically, CNS allows one to automatically identify the neurons related to (few-shot) images of a concept (i.e., <i>base neurons</i>) and those related to the general image synthesis (i.e., <i>general neurons</i>) using diffusion models. By excluding general neurons from the base ones, the <i>concept neurons</i> describing the input concept of interest can be selected. Moreover, in order to achieve continual learning, an incremental finetuning scheme with such concept neurons is also proposed. Different from existing continual learning methods, we do not require to train and store any extra LoRAs when handling multiple concepts. As a result, our CNS framework is able to achieve effective continual concept personalization, not only preventing the catastrophic forgetting but also preserving the zero-shot capability of pretrained text-to-image diffusion models.</p>
         </div>
         <!-- <div class="content has-text-centered">
           <img src="static/images/venn_v8.jpg" alt="algebraic reasoning" class="center">
@@ -165,15 +165,16 @@
 
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Question Types in <b>ReXTime</b></h2>
+        <h2 class="title is-3">Method</h2>
         <div class="content has-text-justified">
-          <p>
-            We present the relationship and examples between the three categories of question we generated. “Having dinner / Watching TV'' does not have strong causality and is classified in <i>sequential</i>, which often results in before / after questions. “Girls falls down'' shows strong causality with “The girl is crying.'' but lacks human intention, is classified in <i>cause-effect</i>. “Chopping tomato / Making a dish'' not only exists strong causal relations but also shows subjective deliberation, which is classified into <i>means-to-an-end</i>. </p>
-        <div class="content has-text-centered">
-          <img src="static/images/venn_v8.jpg" alt="algebraic reasoning" class="center">
-          <p> Reasoning across time question-answer types and examples. The three categories are sequential, cause-effect, and means-to-an-end. </p>
+          <div class="content has-text-centered">
+          <img src="static/images/cns_architecture.jpg" alt="algebraic reasoning" class="center">
+          <p> (a) Identify neurons highly responsive to the target concept (base neurons).
+            (b) Search for the neurons that consistently activate across many unrelated prompts with diverse calibration set (general neurons).
+            (c) Remove general neurons from the base neurons.
+            (d) Only fine-tune concept neurons and special token standing for the concept.
+             </p>
         </div>
-          
           
         </div>
     </div>
@@ -181,10 +182,8 @@
 
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Data Generation Pipeline</h2>
+        <h2 class="title is-3">Qualitatively Result</h2>
         <div class="content has-text-justified">
-          <p>
-            To develop an efficient and effective pipeline, we have addressed two primary challenges: (1) the quality-diversity trade-off in LLM generation, and (2) the high cost of human labor for verification. Initially, prompting an (M)LLM to generate question-answer pairs often results in logically incorrect responses. While few-shot in-context learning enhances logical correctness, it reduces response diversity. We address this by moderating the MLLM with specific event attributes and temporal relations from a structured taxonomy. Additionally, although human verification is necessary to eliminate residual errors, we minimize costs by establishing criteria that allow the MLLM to self-assess the accuracy of its generated QAs. As a bonus feature, we evaluate video moment localization to assess whether an AI model accurately grounds its answers to the correct video segments. Please refer to our paper for more details. </p>
         <div class="content has-text-centered">
           <img src="static/images/main_v8.jpg" alt="algebraic reasoning" class="center">
           <p> In stage I, we collect event pairs from two video sources.

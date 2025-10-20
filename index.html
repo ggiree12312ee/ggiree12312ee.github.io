@@ -163,7 +163,7 @@
     </div>
     </div>
 
-    <div class="columns is-centered has-text-centered">
+    <!-- <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Qualitatively Result</h2>
         <div class="content has-text-justified">
@@ -173,32 +173,30 @@
         </div>
         </div>
     </div>
-    </div>
+    </div> -->
 
-    <!-- <div class="columns is-centered m-6">
+    <div class="columns is-centered m-6">
       <div class="column is-full has-text-centered content">
         <h2 class="title is-3">Qualitatively Result</h2>
         <div class="content has-text-justified">
           <p>
-            We compare ReXTime to the two datasets, NExT-GQA and Ego4D-NLQ on the number of reasoning across time samples, certificate length, and QA-mIoU. The average certificate length in our dataset is considerably longer than in existing tasks. This suggests that effectively addressing our task requires models to have more advanced temporal reasoning abilities. The lower QA-mIoU in ReXTime indicates that an AI model needs to first locate the question event and then scan the rest of the visual events in the video to reason about the correct answer. This is more challenging because the reasoning and moment localization cannot be easily decomposed. For existing tasks, a model mostly needs to localize the question event and then reason within roughly the same span due to the higher QA-IoU.
+            Note that only Continual Diffusion and CNS are capable of performing continual personalization, while Mix-of-Show and Orthogonal Adaptation require to keep LoRAs for each concept for personalization. It can be seen that our personalized outputs match concepts learned across different time, alleviating appearance leakage and catastrophic forgetting problems.
         </p>
         <div id="results-carousel" class="carousel results-carousel">
           <div class="box m-5">
             <div class="content has-text-centered">
-              <img src="static/images/dataset_comp1.png" alt="algebraic reasoning" width="75%"/>
-              <p> We compare ReXTime with related datasets on temporal reasoning or moment localization, highlighting our uniqueness. ReXTime covers features from all similar video QA tasks. Notably, “reasoning-across-time” emphasizes the cause and effect understanding between visual events.</p>
+              <img src="static/images/cns_comparison_figure.png" alt="algebraic reasoning" width="75%"/>
             </div>
           </div>
           <div class="box m-5">
             <div class="content has-text-centered">
-              <img src="static/images/dataset_comp2.png" alt="arithmetic reasoning" width="75%"/>
-              <p>Our comparison focuses on datasets with both question queries and moment localization features. We present a comprehensive report detailing the number of temporal reasoning samples on each split, certificate length (C.L.) and Question-Answer mean Intersection over Union (QA-mIoU) respectively. (<span>&#8224;</span>: Only counts temporal reasoning QA pairs. See supplementary in paper for details.)</p>
+              <img src="static/images/cns_comparison_figure2.jpg" alt="arithmetic reasoning" width="75%"/>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div> -->
+  </div>
 
   <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">

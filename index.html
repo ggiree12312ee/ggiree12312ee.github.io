@@ -151,9 +151,9 @@
         <div class="content has-text-justified">
           <div class="content has-text-centered">
           <img src="static/images/cns_architecture.png" alt="algebraic reasoning" class="center">
-          <p> (a) Identify neurons highly responsive to the target concept (base neurons).
-            (b) Search for the neurons that consistently activate across many unrelated prompts with diverse calibration set (general neurons).
-            (c) Remove general neurons from the base neurons.
+          <p> (a) Identify neurons highly responsive to the target concept (base neurons). <br>
+            (b) Search for the neurons that consistently activate across many unrelated prompts with diverse calibration set (general neurons).<br>
+            (c) Remove general neurons from the base neurons.<br>
             (d) Only fine-tune concept neurons and special token standing for the concept.
              </p>
         </div>
@@ -167,43 +167,16 @@
         <h2 class="title is-3">Qualitatively Result</h2>
         <div class="content has-text-justified">
         <div class="content has-text-centered">
-          <img src="static/images/main_v8.jpg" alt="algebraic reasoning" class="center">
-          <p> In stage I, we collect event pairs from two video sources.
-            In stage II, we score and categorize the event pairs into four relation types.
-            In stage III, the (M)LLM generates question-answer pairs by our carefully written few-shot demonstrations.
-            In stage IV, the LLM self-evaluate the generated samples to reduce the human verification cost. </p>
+          <img src="static/images/cns_comparison_figure.png" alt="algebraic reasoning" class="center">
+          <p>  Note that only Continual Diffusion and CNS are capable of performing continual personalization, while Mix-of-Show and Orthogonal Adaptation require to keep LoRAs for each concept for personalization. It can be seen that our personalized outputs match concepts learned across different time, alleviating appearance leakage and catastrophic forgetting problems. </p>
         </div>
-          
-          
         </div>
     </div>
     </div>
-<!-- 
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Comparisons with Existing Benchmarks</h2>
-        <div class="content has-text-justified">
-          <p>
-            To further distinguish the difference between <i>dataset</i> and other existing ones, we elaborate the benchmark details in Figure. 
-            From the <i>breadth</i> perspective, the prior benchmarks are heavily focused on daily knowledge and common sense. 
-            The covered image format is also limited. Our benchmark aims to cover college-level knowledge with 30 image formats including diagrams, 
-            tables, charts, chemical structures, photos, paintings, geometric shapes, music sheets, medical images, etc. 
-            In the <i>depth</i> aspect, the previous benchmarks normally require commonsense knowledge or simple physical or temporal reasoning. 
-            In contrast, our benchmark requires deliberate reasoning with college-level subject knowledge.
-        </p>
-        <div class="content has-text-centered">
-          <img src="static/images/main_v8.jpg" alt="algebraic reasoning" class="center">
-          <p> Sampled MMMU examples from each discipline. The questions and images need expert-level knowledge to understand and reason.</p>
-        </div>
-          
-          
-        </div>
-    </div>
-    </div> -->
 
-    <div class="columns is-centered m-6">
+    <!-- <div class="columns is-centered m-6">
       <div class="column is-full has-text-centered content">
-        <h2 class="title is-3">Comparisons with Existing Benchmarks</h2>
+        <h2 class="title is-3">Qualitatively Result</h2>
         <div class="content has-text-justified">
           <p>
             We compare ReXTime to the two datasets, NExT-GQA and Ego4D-NLQ on the number of reasoning across time samples, certificate length, and QA-mIoU. The average certificate length in our dataset is considerably longer than in existing tasks. This suggests that effectively addressing our task requires models to have more advanced temporal reasoning abilities. The lower QA-mIoU in ReXTime indicates that an AI model needs to first locate the question event and then scan the rest of the visual events in the video to reason about the correct answer. This is more challenging because the reasoning and moment localization cannot be easily decomposed. For existing tasks, a model mostly needs to localize the question event and then reason within roughly the same span due to the higher QA-IoU.
@@ -224,317 +197,22 @@
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </div> -->
 
-<!-- RESULTS SECTION -->
-<section class="hero is-light is-small">
-  <div class="hero-body has-text-centered">
-    <h1 class="title is-1 mmmu">Experiment Results</h1>
-  </div>
-</section>
-<section class="section">
-  <div class="container">
-    <div class="columns is-centered m-6">
-      <div class="column is-full has-text-centered content">
-        <h2 class="title is-3" id="leaderboard">Leaderboard</h2>
-        <div class="content">
-          <div class="content has-text-justified">
-            <p>
-              We evaluate various models including open-source and proprietary models on the ReXTime benchmark. We consider two types of tasks: moment localization and video question answering (VQA).
-              Our evaluation is conducted under a zero-shot setting and a fine-tuning setting if available.
-            </p>
-          </div>
-
-          <div class="content has-text-centered">
-            <button id="toggleButton" class="button is-rounded is-dark" onclick="changeButtonText()">"Proprietary models Leaderboard (Mini test set)</button>
-          </div>
-
-          <!-- Private Set Table -->
-          <div id="table1" class="content">
-            <p class="private-desc">This table shows the results of human and the proprietary models on 300 mini test set.</p>
-            <table class="table is-striped is-hoverable is-fullwidth">
-              <thead>
-                <tr>
-                  <th rowspan="2">Models</th>
-                  <th colspan="3">Moment Localization</th>
-                  <th colspan="2">VQA</th>
-                </tr>
-                <tr>
-                  <th>mIoU</th>
-                  <th>R @1 (IoU=0.3)</th>
-                  <th>R @1 (IoU=0.5)</th>
-                  <th>Accuracy(%)</th>
-                  <th>Accuracy(%) @IoU ≥ 0.5</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Human</td>
-                  <td>61.11</td>
-                  <td>74.30</td>
-                  <td>62.85</td>
-                  <td>87.98</td>
-                  <td>58.51</td>
-                </tr>
-                <tr>
-                  <td>GPT-4o</td>
-                  <td>36.28</td>
-                  <td>45.33</td>
-                  <td>34.00</td>
-                  <td>73.67</td>
-                  <td>28.67</td>
-                </tr>
-                <tr>
-                  <td>Claude3-Opus</td>
-                  <td>23.61</td>
-                  <td>30.67</td>
-                  <td>17.67</td>
-                  <td>68.67</td>
-                  <td>13.67</td>
-                </tr>
-                <tr>
-                  <td>Gemini-1.5-Pro</td>
-                  <td>28.43</td>
-                  <td>35.67</td>
-                  <td>25.00</td>
-                  <td>68.00</td>
-                  <td>18.33</td>
-                </tr>
-                <tr>
-                  <td>GPT-4V</td>
-                  <td>26.74</td>
-                  <td>33.33</td>
-                  <td>22.00</td>
-                  <td>63.33</td>
-                  <td>16.67</td>
-                </tr>
-                <tr>
-                  <td>Reka-Core</td>
-                  <td>27.95</td>
-                  <td>36.33</td>
-                  <td>24.00</td>
-                  <td>59.67</td>
-                  <td>17.00</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <!-- Private Set Table -->
-          <div id="table2" class="content hidden">
-            <p class="open-mini-desc hidden">This table shows the results of open source models on 300 mini test set.</p>
-            <table class="table is-striped is-hoverable is-fullwidth">
-              <thead>
-                <tr>
-                  <th rowspan="2">Models</th>
-                  <th colspan="3">Moment Localization</th>
-                  <th colspan="2">VQA</th>
-                </tr>
-                <tr>
-                  <th>mIoU</th>
-                  <th>R @1 (IoU=0.3)</th>
-                  <th>R @1 (IoU=0.5)</th>
-                  <th>Accuracy(%)</th>
-                  <th>Accuracy(%) @IoU ≥ 0.5</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>UniVTG (zero-shot)</td>
-                  <td>30.18</td>
-                  <td>42.00</td>
-                  <td>29.33</td>
-                  <td>--</td>
-                  <td>--</td>
-                </tr>
-                <tr>
-                  <td>CG-DETR (zero-shot)</td>
-                  <td>22.53</td>
-                  <td>30.00</td>
-                  <td>16.67</td>
-                  <td>--</td>
-                  <td>--</td>
-                </tr>
-                <tr>
-                  <td>VTimeLLM (zero-shot)</td>
-                  <td>19.37</td>
-                  <td>27.67</td>
-                  <td>16.00</td>
-                  <td>37.33</td>
-                  <td>--</td>
-                </tr>
-                <tr>
-                  <td>TimeChat (zero-shot)</td>
-                  <td>13.01</td>
-                  <td>16.33</td>
-                  <td>7.00</td>
-                  <td>38.33</td>
-                  <td>--</td>
-                </tr>
-                <tr>
-                  <td>LITA (zero-shot)</td>
-                  <td>24.76</td>
-                  <td>34.33</td>
-                  <td>20.00</td>
-                  <td>35.00</td>
-                  <td>--</td>
-                </tr>
-
-                <tr>
-                  <td>UniVTG (fine-tuned)</td>
-                  <td>34.82</td>
-                  <td>53.00</td>
-                  <td>35.33</td>
-                  <td>--</td>
-                  <td>--</td>
-                </tr>
-                <tr>
-                  <td>CG-DETR (fine-tuned)</td>
-                  <td>24.98</td>
-                  <td>38.00</td>
-                  <td>20.33</td>
-                  <td>--</td>
-                  <td>--</td>
-                </tr>
-                <tr>
-                  <td>VTimeLLM (fine-tuned)</td>
-                  <td>29.53</td>
-                  <td>43.67</td>
-                  <td>25.00</td>
-                  <td>54.67</td>
-                  <td>15.67</td>
-                </tr>
-                <tr>
-                  <td>TimeChat (fine-tuned)</td>
-                  <td>27.54</td>
-                  <td>38.00</td>
-                  <td>21.67</td>
-                  <td>52.00</td>
-                  <td>11.33</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <!-- Test Set Table -->
-          <div id="table3" class="content hidden">
-            <p class="open-zero-shot-desc hidden">This table shows the results of zero-shot performance of open source moment retrieval models and grounding MLLMs.</p>
-            <table class="table is-striped is-hoverable is-fullwidth">
-              <thead>
-                <tr>
-                  <th rowspan="2">Models</th>
-                  <th colspan="3">Moment Localization</th>
-                  <th>VQA</th>
-                </tr>
-                <tr>
-                  <th>mIoU</th>
-                  <th>R @1 (IoU=0.3)</th>
-                  <th>R @1 (IoU=0.5)</th>
-                  <th>Accuracy(%)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>UniVTG</td>
-                  <td>28.07</td>
-                  <td>41.45</td>
-                  <td>26.85</td>
-                  <td>--</td>
-                </tr>
-                <tr>
-                  <td>CG-DETR</td>
-                  <td>22.39</td>
-                  <td>29.35</td>
-                  <td>16.70</td>
-                  <td>--</td>
-                </tr>
-                <tr>
-                  <td>VTimeLLM</td>
-                  <td>20.82</td>
-                  <td>31.10</td>
-                  <td>18.30</td>
-                  <td>36.25</td>
-                </tr>
-                <tr>
-                  <td>TimeChat</td>
-                  <td>11.60</td>
-                  <td>14.25</td>
-                  <td>7.70</td>
-                  <td>38.45</td>
-                </tr>
-                <tr>
-                  <td>LITA</td>
-                  <td>21.15</td>
-                  <td>28.90</td>
-                  <td>15.90</td>
-                  <td>33.80</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <!-- Additional Table -->
-          <div id="table4" class="content hidden">
-            <p class="open-finetune-desc hidden">This table shows the results of fine-tuned performance of open source moment retrieval models and grounding MLLMs.</p>
-            <table class="table is-striped is-hoverable is-fullwidth">
-              <thead>
-                <tr>
-                  <th rowspan="2">Models</th>
-                  <th colspan="3">Moment Localization</th>
-                  <th colspan="2">VQA</th>
-                </tr>
-                <tr>
-                  <th>mIoU</th>
-                  <th>R @1 (IoU=0.3)</th>
-                  <th>R @1 (IoU=0.5)</th>
-                  <th>Accuracy(%)</th>
-                  <th>Accuracy(%) @IoU ≥ 0.5</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>UniVTG</td>
-                  <td>34.73</td>
-                  <td>53.55</td>
-                  <td>34.70</td>
-                  <td>--</td>
-                  <td>--</td>
-                </tr>
-                <tr>
-                  <td>CG-DETR</td>
-                  <td>26.60</td>
-                  <td>39.80</td>
-                  <td>22.90</td>
-                  <td>--</td>
-                  <td>--</td>
-                </tr>
-                <tr>
-                  <td>VTimeLLM</td>
-                  <td>30.03</td>
-                  <td>44.05</td>
-                  <td>26.55</td>
-                  <td>58.15</td>
-                  <td>18.30</td>
-                </tr>
-                <tr>
-                  <td>TimeChat</td>
-                  <td>26.52</td>
-                  <td>40.45</td>
-                  <td>21.90</td>
-                  <td>49.35</td>
-                  <td>11.10</td>
-                </tr>
-                <!-- Add more rows as needed -->
-              </tbody>
-            </table>
-          </div>
+  <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Quantitatively Result</h2>
+        <div class="content has-text-justified">
+        <div class="content has-text-centered">
+          <img src="static/images/cns_quantitative.PNG" alt="algebraic reasoning" class="center">
+          <p>  
+            In addition to the alignment-based metrics of CLIP-I and CLIP-T, we provide the computation estimates for different personalization methods. Note that memory requirements for GPU/CPU and computation time for multi-concept personalization indicate the <i>additional</i> costs for fusing concept weights previously learned. </p>
         </div>
-      </div>
+        </div>
     </div>
-  </div>
+    </div>
+
 </section>
-  
 
 
 <!--BibTex citation -->

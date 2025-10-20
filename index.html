@@ -67,11 +67,9 @@
               <!-- New row of authors -->
               <div class="is-size-5 publication-authors">
                 <span class="author-block">
-                  <a href="https://chuyu.org/?fbclid=IwZXh0bgNhZW0CMTAAAR10wQyaYpKvgATLl8pavKrLJyoATjrC6KypMKehka00fbgXDyuIug9BkfA_aem_w8m5sW20POmHM-tjJZHZSg" target="_blank">Yu-Chu Yu</a><sup style="color:#6fbf73;">1</sup>,</span>
+                  <a href="https://www.microsoft.com/en-us/research/people/yenche/" target="_blank">Ci-Siang Lin</a><sup style="color:#6fbf73;">1</sup>,</span>
                 <span class="author-block">
-                  <a href="https://www.microsoft.com/en-us/research/people/yenche/" target="_blank">Ci-Siang Lin</a><sup style="color:#ffac33;">2</sup>,</span>
-                <span class="author-block">
-                  <a href="https://vllab.ee.ntu.edu.tw/ycwang.html" target="_blank">Meng-Lin Wu</a><sup style="color:#6fbf73;">2</sup>,</span>
+                  <a href="https://vllab.ee.ntu.edu.tw/ycwang.html" target="_blank">Meng-Lin Wu</a><sup style="color:#ffac33;">2</sup>,</span>
                 <span class="author-block">
                   <a href="https://vllab.ee.ntu.edu.tw/ycwang.html" target="_blank">Yu-Chiang Frank Wang</a><sup style="color:#6fbf73;">1</sup>,</span>
                 </span>
@@ -119,24 +117,20 @@
 <section class="hero teaser">
   <div class="container is-max-desktop">
         <div class="content has-text-centered">
-          <img src="static/images/cns_teaser.jpg" alt="geometric reasoning" width="100%"/>
-          <p>We present <b>C</b>oncept <b>N</b>euron <b>S</b>election, CNS, a simple yet effective approach to incrementally customize visual concepts. By finetuning concept-related neurons, CNS preserves the zero-shot capabilities of pretrained diffusion models and alleviates catastrophic forgetting problems.</p>
+          <img src="static/images/cns_teaser.png" alt="geometric reasoning" width="100%"/>
+          <p>
+            <b>C</b>oncept <b>N</b>euron <b>S</b>election, CNS, an effective approach to incrementally customize visual concepts. By finetuning concept-related neurons, CNS preserves the zero-shot capabilities of pretrained diffusion models and alleviates catastrophic forgetting problems.</p>
         </div>
     </div>
   </div>
 </section>
 
-<section class="section">
-  <div class="container" style="margin-bottom: 2vh;">
-    <!-- Abstract. -->
-    <!-- <div class="columns is-centered has-text-centered">
+
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">🔔News</h2>
-        <div class="content has-text-justified">
-          <p>
-            <b> [2024-06-06]: Submit to NeurIPS 2024 Datasets and Benchmarks Track</b>
-          </p>
-      </div>       -->
+        <!-- Abstract. -->
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>Updating diffusion models in an incremental setting would be practical in real-world applications yet computationally challenging. We present a novel learning strategy of Concept Neuron Selection, a simple yet effective approach to perform personalization in a continual learning scheme. CNS uniquely identifies neurons in diffusion models that are closely related to the target concepts. In order to mitigate catastrophic forgetting problems while preserving zero-shot text-to-image generation ability, CNS finetunes concept neurons in an incremental manner and jointly preserves knowledge learned of previous concepts. Evaluation of real-world datasets demonstrates that CNS achieves state-of-the-art performance with minimal parameter adjustments, outperforming previous methods in both single and multi-concept personalization works. CNS also achieves fusion-free operation, reducing memory storage and processing time for continual personalization. </p>
@@ -150,25 +144,13 @@
             
 <section class="section">
   <div class="container">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Overview</h2>
-        <div class="content has-text-justified">
-          <p>Latent Diffusion Models (LDMs) represent a milestone for image generation task by leveraging vast collection of text-image pairs and denoising process. LDMs enable users to create high-quality images through simple text prompts. Yet, LDMs often fall short in generating user-specific concepts e.g. their pets, a scene in a national park, which poses a practical challenge in text-to-image generation since these user-specific concepts are hard to describe directly by text. To address this issue, personalization techniques allow users to adapt LDMs to generate their desired specific content by finetuning it with their own examples. Existing methods tend to make the assumption that personalized concepts are fixed, which means that storing all of the personalized model weights and multiple times of fusion are required if users need different numbers of personalized concepts across different images. However, in the realistic application scenario, users' personalized concepts never remain static and will incrementally increase. A practical scenario is that users can continuously assign new concepts to a single diffusion model and additional computation effort while generating new composite images is not required. Furthermore, learning the concepts separately usually results in conflict while fusing concepts together.</p>
-          <p>In this paper, we propose CNS, <b>C</b>oncept <b>N</b>euron <b>S</b>election, which is able to identify the neurons relevant to personalized target concepts in an incremental fashion. Specifically, CNS allows one to automatically identify the neurons related to (few-shot) images of a concept (i.e., <i>base neurons</i>) and those related to the general image synthesis (i.e., <i>general neurons</i>) using diffusion models. By excluding general neurons from the base ones, the <i>concept neurons</i> describing the input concept of interest can be selected. Moreover, in order to achieve continual learning, an incremental finetuning scheme with such concept neurons is also proposed. Different from existing continual learning methods, we do not require to train and store any extra LoRAs when handling multiple concepts. As a result, our CNS framework is able to achieve effective continual concept personalization, not only preventing the catastrophic forgetting but also preserving the zero-shot capability of pretrained text-to-image diffusion models.</p>
-        </div>
-        <!-- <div class="content has-text-centered">
-          <img src="static/images/venn_v8.jpg" alt="algebraic reasoning" class="center">
-        </div> -->
-    </div>
-    </div>
 
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Method</h2>
         <div class="content has-text-justified">
           <div class="content has-text-centered">
-          <img src="static/images/cns_architecture.jpg" alt="algebraic reasoning" class="center">
+          <img src="static/images/cns_architecture.png" alt="algebraic reasoning" class="center">
           <p> (a) Identify neurons highly responsive to the target concept (base neurons).
             (b) Search for the neurons that consistently activate across many unrelated prompts with diverse calibration set (general neurons).
             (c) Remove general neurons from the base neurons.
